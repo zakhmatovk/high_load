@@ -2,7 +2,7 @@
 import datetime
 
 import pytest
-from auth.models.user import User
+from social_network.models.user import User
 
 
 @pytest.mark.asyncio
@@ -13,7 +13,7 @@ async def test_create_user():
         password="mockpassword",
         first_name="Mock",
         last_name="User",
-        birth_date=datetime.date.today().isoformat(),
+        birth_date=datetime.date.today(),
         gender="Male",
         city="Mock City",
         interests=["Coding", "AI"]

@@ -1,11 +1,12 @@
 import datetime
 from uuid import UUID, uuid4
-from pydantic import BaseModel, Field
+from pydantic import Field
 
-from auth.models.base import BaseDBModel
+from common.model import BasePgModel
 
-class User(BaseDBModel):
-    __database__ = 'auth'
+class User(BasePgModel):
+    __database__ = 'social_network'
+    __table__ = 'users'
     
     id: UUID = Field(default_factory=uuid4)
     username: str

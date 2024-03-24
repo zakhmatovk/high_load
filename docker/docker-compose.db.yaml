@@ -7,9 +7,10 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: auth
+      POSTGRES_DB: social_network
     volumes:
-      # - ./data:/var/lib/postgresql/data
-      - ../auth/migrations/initial.sql:/docker-entrypoint-initdb.d/initial.sql
+      - ./data:/var/lib/postgresql/data
+      - ../social_network/migrations/202403231940_users.sql:/docker-entrypoint-initdb.d/202403231940_users.sql
+      - ../common/migrations/202403241129_test_table.sql:/docker-entrypoint-initdb.d/202403241129_test_table.sql
     ports:
       - 5432:5432

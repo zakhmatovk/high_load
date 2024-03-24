@@ -23,7 +23,7 @@ class DatabaseConnection:
     async def get_connection(cls, db_name: str) -> asyncpg.Connection:
         if db_name not in cls._databases:
             # TODO: Load from environment variables
-            cls._load_from_yaml('auth/config/service.yaml')
+            cls._load_from_yaml('social_network/config/service.yaml')
         if db_name not in cls._databases:
             raise UnknownDatabaseError(db_name)
         return await cls._get_connection(cls._databases[db_name])
