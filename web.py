@@ -1,4 +1,8 @@
 
+from fastapi import FastAPI
 
-def main():
-    pass
+from social_network.api.user import router as user_router
+
+
+app = FastAPI()
+app.include_router(user_router)
