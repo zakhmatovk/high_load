@@ -1,16 +1,23 @@
 version: '3.8'
 
 services:
-  db:
+  pgmaster:
     image: postgres:latest
-    restart: always
+    container_name: pgmaster
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: social_network
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./master-data:/var/lib/postgresql/data
       - ../social_network/migrations/202403231940_users.sql:/docker-entrypoint-initdb.d/202403231940_users.sql
       - ../common/migrations/202403241129_test_table.sql:/docker-entrypoint-initdb.d/202403241129_test_table.sql
+      - ./master-conf/create_replicator_role.sql:/docker-entrypoint-initdb.d/202403221940_create_replicator_role.sql
+      - ./master-conf/10_update_conf.sh:/docker-entrypoint-initdb.d/10_update_conf.sh
     ports:
-      - 5432:5432
+      - "5432:5432"
+    networks:
+      - general
+
+networks:
+  general:
