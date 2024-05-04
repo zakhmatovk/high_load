@@ -6,10 +6,11 @@ import pytest
 
 from common.model import BasePgModel
 
+
 class TestModel(BasePgModel):
-    __database__ = 'social_network'
-    __table__ = 'test_table'
-    
+    __database__ = "social_network"
+    __table__ = "test_table"
+
     id: UUID = Field(default_factory=uuid4)
     field: str
 
@@ -19,11 +20,12 @@ async def test_insert():
     test_model = TestModel(
         field="test_field",
     )
-    assert test_model.id is not None, 'TestModel ID must be set'
+    assert test_model.id is not None, "TestModel ID must be set"
 
     test_model = await test_model.insert()
 
-    assert test_model.id is not None, 'TestModel ID must be set'
+    assert test_model.id is not None, "TestModel ID must be set"
+
 
 @pytest.mark.asyncio
 async def test_load():
